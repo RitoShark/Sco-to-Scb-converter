@@ -87,7 +87,7 @@ def process_wad(wad_bytes):
         return wad_bytes
 
     # Find all .sco paths in bin files
-    sco_path_pattern = re.compile(rb'([A-Za-z0-9_/]+\.sco)', re.IGNORECASE)
+    sco_path_pattern = re.compile(rb'([A-Za-z0-9_./]+\.sco)', re.IGNORECASE)
     sco_paths = set()
 
     for chunk_hash, chunk in bin_chunks.items():
@@ -205,7 +205,7 @@ def process_fantome(fantome_path, verbose=True):
 def check_sco_status(fantome_path):
     """Check SCO status in fantome. Returns (has_sco_chunks, has_sco_refs)."""
     try:
-        sco_path_pattern = re.compile(rb'[A-Za-z0-9_/]+\.sco', re.IGNORECASE)
+        sco_path_pattern = re.compile(rb'[A-Za-z0-9_./]+\.sco', re.IGNORECASE)
         has_sco_chunks = False
         has_sco_refs = False
 
