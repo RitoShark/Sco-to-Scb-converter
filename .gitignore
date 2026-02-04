@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+build/
+*.spec
+debug_sco.py
+test_fix.py
+test_specific.py
