@@ -380,6 +380,7 @@ def main():
         print("  - Raw mod folders (loose .sco and .bin files)")
         print("  - Skin collection folders (parent folder with skin subfolders)")
         print("  - Single .sco files")
+        print("  - Single .wad.client files")
         print("  - Windows shortcuts (.lnk) to any of the above")
         print("\nUsage: sco_fixer.exe <file.fantome> [folder] [file.sco] ...")
         try:
@@ -390,8 +391,8 @@ def main():
 
     # Collect all fantome files to process
     files_to_process = []
-
     raw_folders = []
+    sco_converted = 0
 
     for arg in sys.argv[1:]:
         # Resolve shortcuts first
@@ -430,8 +431,22 @@ def main():
                         f.write(scb_data)
                     os.remove(arg)
                     print(f"Converted: {arg} -> {scb_path}")
+                    sco_converted += 1
                 except Exception as e:
                     print(f"Error converting {arg}: {e}")
+        elif arg.lower().endswith('.wad.client') or arg.lower().endswith('.wad'):
+            # Single WAD file
+            if os.path.exists(arg):
+                try:
+                    print(f"Processing WAD: {os.path.basename(arg)}")
+                    with open(arg, 'rb') as f:
+                        wad_bytes = f.read()
+                    new_wad_bytes = process_wad(wad_bytes)
+                    with open(arg, 'wb') as f:
+                        f.write(new_wad_bytes)
+                    sco_converted += 1
+                except Exception as e:
+                    print(f"Error processing {arg}: {e}")
         else:
             print(f"Skipping (not a fantome, folder, or SCO): {arg}")
 
@@ -461,7 +476,7 @@ def main():
 
         print(f"\nResults: {total_converted} SCO files converted, {total_bins} bins updated, {total_errors} errors")
 
-    if not files_to_process and not raw_folders:
+    if not files_to_process and not raw_folders and sco_converted == 0:
         print("\nNo files to process.")
     elif files_to_process:
         total = len(files_to_process)

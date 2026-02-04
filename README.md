@@ -10,6 +10,7 @@ Get `sco_fixer.exe` from the [dist](dist/) folder.
 
 Drag and drop onto the exe:
 - `.fantome` files
+- `.wad.client` files
 - `.sco` files
 - Folders containing `.fantome` files
 - Folders containing loose `.sco` and `.bin` files
