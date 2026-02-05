@@ -26,7 +26,7 @@ The tool will:
 Some old mods use `.sco` meshes which aren't supported anymore. This tool batch converts them to the newer `.scb` format.
 
 
-has logic from : 
+## Has logic from: 
 
 # Pyritofile
 
