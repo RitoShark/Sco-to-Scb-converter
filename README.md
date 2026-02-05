@@ -28,6 +28,8 @@ Some old mods use `.sco` meshes which aren't supported anymore. This tool batch 
 
 ## Has logic from: 
 
+https://github.com/GuiSaiUwU/pyritofile-package
+
 # Pyritofile
 
 Pyritofile is a Python library designed to read and manipulate basic league of legends files.
